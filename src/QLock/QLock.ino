@@ -1,11 +1,15 @@
 #include <Arduino.h>
 #include <Watchy.h>
-
+#include "settings.h"
 #include <bitset>
 
 #include "bitmaps.h"
 
+
+
 class QLock : public Watchy {
+
+   using Watchy::Watchy;
    public:
     void drawWatchFace() {
         display.drawBitmap(0, 0, epd_bitmap_qlock, 200, 200, GxEPD_WHITE,
@@ -205,10 +209,14 @@ class QLock : public Watchy {
     }
 };
 
-QLock m;
+QLock m(settings); 
 
-void setup() { m.init(); }
+void setup() {
+    m.init();
+}
 
 void loop() {
-    // pass
+  // this should never run, Watchy deep sleeps after init();
 }
+
+
